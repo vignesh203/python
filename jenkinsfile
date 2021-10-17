@@ -1,0 +1,17 @@
+pipeline {
+    agent {
+        node {
+            label 'my_local_server'
+            customWorkspace '/python/'
+        }
+    }
+    stages {
+        stage('Checkout project') {
+            steps {
+                script {
+                    git branch: "master",
+                        credentialsId: 'my-credentials',
+                        url: 'https://user@github.org/myproject/sample-repo.git'
+                }
+            }
+        }
